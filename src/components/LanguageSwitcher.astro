@@ -1,7 +1,7 @@
 ---
 // Получаем текущий путь и язык
 const currentPath = Astro.url.pathname;
-const isDefaultLocale = !currentPath.startsWith("/en/");
+const isDefaultLocale = !currentPath.startsWith("/en");
 const currentLocale = isDefaultLocale ? "ru" : "en";
 
 // Функция для создания целевого URL
