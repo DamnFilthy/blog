@@ -1,0 +1,98 @@
+---
+// Получаем текущий путь и язык
+const currentPath = Astro.url.pathname;
+const isDefaultLocale = !currentPath.startsWith("/en/");
+const currentLocale = isDefaultLocale ? "ru" : "en";
+
+// Функция для создания целевого URL
+const getTargetUrl = () => {
+  if (isDefaultLocale) {
+    // Переход с RU на EN - добавляем /en/
+    return `/en${currentPath === "/" ? "" : currentPath}`;
+  } else {
+    // Переход с EN на RU - убираем /en/
+    return currentPath.replace("/en", "") || "/";
+  }
+};
+
+getTargetUrl();
+---
+
+<button
+  id="language-selector"
+  class="cursor-pointer flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+>
+  <span class="text-sm font-medium">
+    {currentLocale.toUpperCase()}
+  </span>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="m12 18-6-6 6-6"></path>
+    <path d="m18 18-6-6 6-6"></path>
+  </svg>
+</button>
+
+<script>
+  document
+    .getElementById("language-selector")
+    ?.addEventListener("click", () => {
+      const isEnLocale = window.document.location.pathname.startsWith("/en");
+      const otherLocale = isEnLocale ? "ru" : "en";
+
+      // Сохраняем предпочитаемый язык
+      localStorage.setItem("preferredLocale", otherLocale);
+
+      // Перенаправляем
+      window.location.href = isEnLocale
+        ? window.document.location.href.replace("/en/", "/")
+        : window.document.location.href;
+    });
+
+  try {
+    const preferredLocale = localStorage.getItem("preferredLocale");
+    const currentPath = window.location.pathname;
+
+    // Улучшенная проверка локали в пути
+    const isDefaultLocale = !currentPath.startsWith("/en");
+    const alreadyHasLocale =
+      currentPath.startsWith("/en/") || currentPath === "/en";
+
+    if (preferredLocale) {
+      // Если предпочитаемый язык не совпадает с текущим
+      if (
+        (preferredLocale === "en" && isDefaultLocale) ||
+        (preferredLocale === "ru" && !isDefaultLocale)
+      ) {
+        let newUrl;
+
+        if (preferredLocale === "en") {
+          // Добавляем /en только если его ещё нет
+          newUrl = alreadyHasLocale
+            ? currentPath
+            : `/en${currentPath === "/" ? "" : currentPath}`;
+        } else {
+          // Убираем /en только если он есть
+          newUrl = alreadyHasLocale
+            ? currentPath.replace("/en", "") || "/"
+            : currentPath;
+        }
+
+        // Дополнительная проверка, чтобы избежать дублирования
+        if (newUrl !== currentPath) {
+          window.location.href = newUrl;
+        }
+      }
+    }
+  } catch (e) {
+    console.error("Language switch error:", e);
+  }
+</script>

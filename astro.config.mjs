@@ -2,9 +2,23 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { SITE } from './src/config';
 
-// https://astro.build/config
+import tailwindcss from '@tailwindcss/vite';
+
 export default defineConfig({
-	site: 'https://example.com',
-	integrations: [mdx(), sitemap()],
+  site: SITE.url,
+  integrations: [mdx(), sitemap()],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
+  i18n: {
+    locales: ["ru", "en"],
+    defaultLocale: "en",
+    routing: {
+        prefixDefaultLocale: false
+    }
+  }
 });
