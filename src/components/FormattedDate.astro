@@ -1,17 +1,21 @@
 ---
+const currentPath = Astro.url.pathname;
+const isDefaultLocale = !currentPath.startsWith("/en");
+const currentLocale = isDefaultLocale ? "ru-RU" : "en-EN";
+
 interface Props {
-	date: Date;
+  date: Date;
 }
 
 const { date } = Astro.props;
 ---
 
 <time datetime={date.toISOString()}>
-	{
-		date.toLocaleDateString('en-us', {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		})
-	}
+  {
+    date.toLocaleDateString(currentLocale as string, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+  }
 </time>
