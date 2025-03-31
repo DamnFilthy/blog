@@ -1,23 +1,25 @@
 ---
+import BaseEnLayout from "../../../layouts/BaseEnLayout.astro";
+import FormattedDate from "../../../components/FormattedDate.astro";
+
 import { type CollectionEntry, getCollection } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
 import { render } from "astro:content";
-import FormattedDate from "../../components/FormattedDate.astro";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getCollection("blogEn");
   return posts.map((post) => ({
     params: { slug: post.id },
     props: post,
   }));
 }
-type Props = CollectionEntry<"blog">;
+
+type Props = CollectionEntry<"blogEn">;
 
 const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BaseLayout>
+<BaseEnLayout>
   <article>
     <div class="hero-image">
       {
@@ -47,4 +49,4 @@ const { Content } = await render(post);
       <Content />
     </div>
   </article>
-</BaseLayout>
+</BaseEnLayout>

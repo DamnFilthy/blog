@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BaseEnLayout from "../../../layouts/BaseEnLayout.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../../consts";
 import { getCollection } from "astro:content";
 import FormattedDate from "../../../components/FormattedDate.astro";
@@ -9,7 +9,7 @@ const posts = (await getCollection("blog")).sort(
 );
 ---
 
-<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+<BaseEnLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <h1>English page</h1>
 
   <section>
@@ -29,4 +29,4 @@ const posts = (await getCollection("blog")).sort(
       }
     </ul>
   </section>
-</BaseLayout>
+</BaseEnLayout>

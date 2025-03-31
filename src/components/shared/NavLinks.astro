@@ -1,0 +1,12 @@
+---
+import HeaderLink from "../HeaderLink.astro";
+const { navLinks } = Astro.props;
+---
+
+<div class="hidden md:flex gap-5">
+  {
+    navLinks.map((link) => (
+      <HeaderLink href={link.url}> {link.text}</HeaderLink>
+    ))
+  }
+</div>

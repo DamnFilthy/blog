@@ -5,7 +5,7 @@ import Footer from "../components/Footer.astro";
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
-import { navLinks } from "../configs/navMenu";
+import { navEnLinks } from "../configs/navMenu";
 ---
 
 <html lang="en" class="dark">
@@ -25,7 +25,7 @@ import { navLinks } from "../configs/navMenu";
   </head>
 
   <body class="bg-[var(--l-bg)] dark:bg-[var(--d-bg)]">
-    <Header navLinks={navLinks} />
+    <Header navLinks={navEnLinks} />
 
     <main>
       <slot />

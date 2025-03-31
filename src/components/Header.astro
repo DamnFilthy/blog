@@ -1,48 +1,33 @@
 ---
-import HeaderLink from "./HeaderLink.astro";
-import ThemeButton from "./ThemeButton.astro";
-import LanguageSwitcher from "./LanguageSwitcher.astro";
-import { getRelativeLocaleUrl } from "astro:i18n";
-// import { SITE_TITLE } from "../consts";
+import HeaderLogo from "./shared/HeaderLogo.astro";
+import NavLinks from "./shared/NavLinks.astro";
+import SocialLinks from "./shared/SocialLinks.astro";
+import ThemeButton from "./shared/ThemeButton.astro";
+import LanguageSwitcher from "./shared/LanguageSwitcher.astro";
+import MobileMenu from "./shared/MobileMenu.astro";
+import BurgerButton from "./shared/BurgerButton.astro";
+
+const { navLinks } = Astro.props;
 ---
 
-<header class="bg-[var(--l-bg)] dark:bg-[var(--d-bg)] sticky top-0 pl-6 pr-6">
+<header
+  class="bg-[var(--l-bg)] dark:bg-[var(--d-bg)] sticky top-0 pl-6 pr-6 z-20 shadow-md"
+>
   <nav class="flex justify-between items-center">
-    <a href="/">
-      <img src="/logo-mini.png" height="70" width="70" />
-    </a>
+    <HeaderLogo />
 
-    <div class="internal-links">
-      <HeaderLink href="/">Home</HeaderLink>
-      <HeaderLink href="/blog">Blog</HeaderLink>
-      <HeaderLink href="/about">About</HeaderLink>
-    </div>
+    <NavLinks navLinks={navLinks} />
 
-    <div class="flex gap-3">
-      <LanguageSwitcher />
-      <a href="https://github.com/DamnFilthy/blog" target="_blank">
-        <span class="sr-only">Blog GitHub repo</span>
-        <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
-          ><path
-            fill="currentColor"
-            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-          ></path></svg
-        >
-      </a>
-      <a href="https://t.me/vib_online" target="_blank">
-        <span class="sr-only">Subscribe Telegram</span>
-        <svg
-          viewBox="0 0 496 512"
-          xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
-          ><path
-            fill="currentColor"
-            d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"
-          ></path></svg
-        >
-      </a>
-      <ThemeButton />
+    <div class="flex gap-5">
+      <SocialLinks />
+
+      <div class="flex gap-2">
+        <LanguageSwitcher />
+        <ThemeButton />
+        <BurgerButton />
+      </div>
     </div>
   </nav>
 </header>
+
+<MobileMenu />
