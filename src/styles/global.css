@@ -154,3 +154,21 @@ hr {
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }
+
+.pagefind-ui {
+	position: sticky !important;
+	top: 68px !important;
+}
+
+.pagefind-ui__drawer{
+    width: 100% !important;
+    position: absolute !important;
+	top: 50px !important;
+    left: 0 !important;
+    padding: 1rem 2rem !important;
+    background-color: #fff !important;
+	border-right: 1px solid rgb(200, 200, 200) !important;
+	border-left: 1px solid rgb(200, 200, 200) !important;
+	border-bottom: 1px solid rgb(200, 200, 200) !important;
+	border-radius: 10px !important;
+}

@@ -6,6 +6,7 @@ import ThemeButton from "./shared/ThemeButton.astro";
 import LanguageSwitcher from "./shared/LanguageSwitcher.astro";
 import MobileMenu from "./shared/MobileMenu.astro";
 import BurgerButton from "./shared/BurgerButton.astro";
+import Search from "astro-pagefind/components/Search";
 
 const { navLinks } = Astro.props;
 ---
@@ -18,10 +19,10 @@ const { navLinks } = Astro.props;
 
     <NavLinks navLinks={navLinks} />
 
-    <div class="flex gap-5">
+    <div class="flex items-center gap-5">
       <SocialLinks />
 
-      <div class="flex gap-2">
+      <div class="flex items-center gap-2">
         <LanguageSwitcher />
         <ThemeButton />
         <BurgerButton />
@@ -31,3 +32,5 @@ const { navLinks } = Astro.props;
 </header>
 
 <MobileMenu />
+
+<Search id="search" className="pagefind-ui" uiOptions={{ showImages: true }} />
