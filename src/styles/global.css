@@ -20,7 +20,7 @@
 
 * {
 	box-sizing: border-box;
-	transition: .3s ease;
+	transition: .1s ease;
 }
 
 body {
@@ -31,7 +31,6 @@ body {
 	background-size: 100% 600px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7;
 }
@@ -48,7 +47,6 @@ h4,
 h5,
 h6 {
 	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
 	line-height: 1.2;
 }
 

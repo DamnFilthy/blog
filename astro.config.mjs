@@ -8,7 +8,7 @@ import compressor from "astro-compressor";
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: "http://localhost:4321",
+  site: "https://web-impulse.ru/",
   integrations: [mdx(), sitemap(), compressor()],
 
   vite: {

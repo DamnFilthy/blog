@@ -24,7 +24,9 @@ import { navEnLinks } from "../configs/navMenu";
     <BaseHead title={title} description={description} />
   </head>
 
-  <body class="bg-[var(--l-bg)] dark:bg-[var(--d-bg)]">
+  <body
+    class="min-h-screen bg-[var(--l-bg)] dark:bg-[var(--d-bg)] text-[var(--d-bg)] dark:text-[var(--l-bg)]"
+  >
     <Header navLinks={navEnLinks} />
 
     <main>
