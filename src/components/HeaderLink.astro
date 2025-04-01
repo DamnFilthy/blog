@@ -6,20 +6,41 @@ type Props = HTMLAttributes<"a">;
 const { href, class: className, ...props } = Astro.props;
 const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "/");
 
-const subpath = pathname.match(/[^\/]+/g);
+const subpath = pathname.replace("/en", "").match(/[^\/]+/g);
 const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
+
+const baseClass = "nav-link";
 ---
 
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
+<a
+  href={href}
+  class:list={[baseClass, className, { active: isActive }]}
+  {...props}
+>
   <slot />
 </a>
 <style>
-  a {
+  .nav-link {
+    position: relative;
     display: inline-block;
     text-decoration: none;
   }
-  a.active {
+  .nav-link::before {
+    position: absolute;
+    left: -7px;
+    content: ".";
+  }
+
+  .nav-link::after {
+    content: "()";
+  }
+
+  .nav-link.active {
     font-weight: bolder;
-    text-decoration: underline;
+    color: rgb(52, 188, 52);
+  }
+
+  .nav-link.active::after {
+    content: "('here')";
   }
 </style>

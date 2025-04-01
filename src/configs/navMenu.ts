@@ -24,12 +24,12 @@ export const navEnLinks = [
     },
     {
       id: 1,
-      url: "/blog",
+      url: "/en/blog",
       text: "Blog",
     },
     {
       id: 2,
-      url: "/about",
+      url: "/en/about",
       text: "About",
     },
 ];
