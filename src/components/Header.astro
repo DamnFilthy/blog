@@ -12,7 +12,7 @@ const { navLinks } = Astro.props;
 ---
 
 <header
-  class="pl-1 pr-1 text-[var(--d-bg)] dark:text-[var(--l-bg)] sticky top-0 z-20 rounded-4xl bg-opacity-60 backdrop-filter backdrop-saturate-180 backdrop-blur-[20px]"
+  class="pl-1 pr-1 text-[var(--d-bg)] dark:text-[var(--l-bg)] sticky top-0 z-20 rounded-none lg:rounded-4xl bg-opacity-60 backdrop-filter backdrop-saturate-180 backdrop-blur-[20px]"
 >
   <nav class="flex justify-between items-center">
     <HeaderLogo />
@@ -31,7 +31,7 @@ const { navLinks } = Astro.props;
   </nav>
 </header>
 
-<MobileMenu />
+<MobileMenu navLinks={navLinks} />
 
 <Search id="search" className="pagefind-ui" uiOptions={{ showImages: true }} />
 

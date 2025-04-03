@@ -1,13 +1,34 @@
-<div class="mobile-menu z-10 shadow-md" id="mobile-menu">Mobile menu</div>
+---
+import HeaderLink from "../HeaderLink.astro";
+const { navLinks } = Astro.props;
+---
+
+<div class="mobile-menu z-10 shadow-md" id="mobile-menu">
+  {
+    navLinks.map((link) => (
+      <HeaderLink
+        class="font-[500] text-[var(--l-bg-purple)] dark:text-[var(--l-bg)] before:text-[var(--l-bg-purple)] after:text-[var(--l-bg-purple)] dark:before:text-[var(--l-bg-purple)] dark:after:text-color-[var(--l-bg-purple)]"
+        href={link.url}
+      >
+        {link.text}
+      </HeaderLink>
+    ))
+  }
+</div>
 
 <style>
   .mobile-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
     transition: 0.5s ease;
     position: fixed;
+    left: 0;
     top: -1000px;
-    right: 0;
     width: 100%;
-    height: 300px;
 
     background-color: var(--l-bg);
     color: var(--d-bg);
