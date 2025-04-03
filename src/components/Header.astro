@@ -12,20 +12,22 @@ const { navLinks } = Astro.props;
 ---
 
 <header
-  class="pl-1 pr-1 text-[var(--d-bg)] dark:text-[var(--l-bg)] sticky top-0 z-20 rounded-none lg:rounded-4xl bg-opacity-60 backdrop-filter backdrop-saturate-180 backdrop-blur-[20px]"
+  class="pl-1 pr-3 text-[var(--d-bg)] dark:text-[var(--l-bg)] sticky top-0 md:top-3 z-20 rounded-none lg:rounded-4xl bg-opacity-60 backdrop-filter backdrop-blur-[20px]"
 >
   <nav class="flex justify-between items-center">
     <HeaderLogo />
 
-    <NavLinks navLinks={navLinks} />
+    <div class="flex items-center gap-10">
+      <NavLinks navLinks={navLinks} class="mr-5" />
 
-    <div class="flex items-center gap-5">
-      <SocialLinks />
+      <div class="flex items-center gap-5">
+        <SocialLinks />
 
-      <div class="flex items-center gap-2">
-        <LanguageSwitcher />
-        <ThemeButton />
-        <BurgerButton />
+        <div class="flex items-center gap-2">
+          <LanguageSwitcher />
+          <ThemeButton />
+          <BurgerButton />
+        </div>
       </div>
     </div>
   </nav>

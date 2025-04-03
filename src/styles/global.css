@@ -160,8 +160,12 @@ hr {
 .pagefind-ui--reset {
 	transition: 2s all;
 	position: fixed !important;
-	top: 68px !important;
+	top: 82px !important;
 	max-width: 1200px;
+
+	@media (max-width: 767px) {
+		top: 72px !important;
+	}
 }
 
 .pagefind-ui--reset.hide {
