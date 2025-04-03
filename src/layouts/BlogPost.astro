@@ -8,9 +8,9 @@ const { title, description, pubDate, updatedDate, heroImage, navLinks } =
   Astro.props;
 ---
 
-<html lang="en" class="dark">
+<html lang="en">
   <head>
-    <script>
+    <script is:inline>
       if (
         localStorage.theme === "dark" ||
         (!("theme" in localStorage) &&
@@ -28,12 +28,19 @@ const { title, description, pubDate, updatedDate, heroImage, navLinks } =
     class="min-h-screen bg-[var(--l-bg)] dark:bg-[var(--d-bg)] text-[var(--d-bg)] dark:text-[var(--l-bg)]"
   >
     <Header navLinks={navLinks} />
-    <main>
+
+    <main style="padding-top: 100px;">
       <article>
         <div class="hero-image">
           {
             heroImage && (
-              <img width={1020} height={510} src={heroImage} alt="" />
+              <img
+                width={1020}
+                height={510}
+                src={heroImage}
+                alt=""
+                class="w-[100%]"
+              />
             )
           }
         </div>

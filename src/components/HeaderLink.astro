@@ -19,28 +19,3 @@ const baseClass = "nav-link";
 >
   <slot />
 </a>
-<style>
-  .nav-link {
-    position: relative;
-    display: inline-block;
-    text-decoration: none;
-  }
-  .nav-link::before {
-    position: absolute;
-    left: -7px;
-    content: ".";
-  }
-
-  .nav-link::after {
-    content: "()";
-  }
-
-  .nav-link.active {
-    font-weight: bolder;
-    color: rgb(52, 188, 52);
-  }
-
-  .nav-link.active::after {
-    content: "('here')";
-  }
-</style>

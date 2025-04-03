@@ -33,13 +33,12 @@ body {
 	overflow-wrap: break-word;
 	font-size: 20px;
 	line-height: 1.7;
-	max-width: 1450px;
+	max-width: 1200px;
 	margin: 0 auto;
 }
 
 main {
 	width: 100%;
-	padding: 2rem;
 }
 
 h1,
@@ -100,6 +99,7 @@ table {
 
 img {
 	max-width: 100%;
+	object-fit: contain;
 	height: auto;
 	border-radius: 8px;
 }
@@ -157,9 +157,15 @@ hr {
 	white-space: nowrap;
 }
 
-.pagefind-ui {
-	position: sticky !important;
-	top: 78px !important;
+.pagefind-ui--reset {
+	transition: 2s all;
+	position: fixed !important;
+	top: 68px !important;
+	max-width: 1200px;
+}
+
+.pagefind-ui--reset.hide {
+	top: -1000px !important;
 }
 
 .pagefind-ui__drawer {
@@ -183,7 +189,7 @@ html.dark .pagefind-ui__drawer {
 
 html.dark .pagefind-ui__search-input {
 	background-color: var(--d-bg) !important;
-	border: none !important;
+	border: 1px solid #3d3838 !important;
 	outline: none !important;
 	color: var(--l-bg) !important;
 }

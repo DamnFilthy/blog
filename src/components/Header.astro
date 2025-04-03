@@ -12,7 +12,7 @@ const { navLinks } = Astro.props;
 ---
 
 <header
-  class="bg-[var(--l-bg)] dark:bg-[var(--d-bg)] text-[var(--d-bg)] dark:text-[var(--l-bg)] sticky top-0 pl-6 pr-6 z-20 shadow-md rounded-lg"
+  class="pl-1 pr-1 text-[var(--d-bg)] dark:text-[var(--l-bg)] sticky top-0 z-20 rounded-4xl bg-opacity-60 backdrop-filter backdrop-saturate-180 backdrop-blur-[20px]"
 >
   <nav class="flex justify-between items-center">
     <HeaderLogo />
@@ -34,3 +34,17 @@ const { navLinks } = Astro.props;
 <MobileMenu />
 
 <Search id="search" className="pagefind-ui" uiOptions={{ showImages: true }} />
+
+<script>
+  window.addEventListener("load", () => {
+    const searchElement = document.querySelector(".pagefind-ui--reset");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY >= 100) {
+        searchElement.classList.add("hide");
+      } else {
+        searchElement.classList.remove("hide");
+      }
+    });
+  });
+</script>

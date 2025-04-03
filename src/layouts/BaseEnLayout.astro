@@ -8,9 +8,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 import { navEnLinks } from "../configs/navMenu";
 ---
 
-<html lang="en" class="dark">
+<html lang="en">
   <head>
-    <script>
+    <script is:inline>
       if (
         localStorage.theme === "dark" ||
         (!("theme" in localStorage) &&
@@ -29,7 +29,7 @@ import { navEnLinks } from "../configs/navMenu";
   >
     <Header navLinks={navEnLinks} />
 
-    <main>
+    <main style="padding-top: 100px;">
       <slot />
     </main>
 

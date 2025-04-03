@@ -12,7 +12,7 @@ export default defineConfig({
   integrations: [mdx(), sitemap(), compressor()],
 
   build: {
-    format: "file",
+    format: "directory",
   },
   
   vite: {
