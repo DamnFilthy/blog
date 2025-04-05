@@ -1,0 +1,227 @@
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="timeline-header">
+      <div class="timeline-title">Первый компьютер</div>
+      <div class="timeline-date">2000</div>
+    </div>
+    <div class="timeline-content">
+      Я заполучил мой первый компьютер — Windows 95. Потратил кучу времени на игры в 
+      сапера и изучение команды DOS.
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-header">
+      <div class="timeline-title">Закончил универ</div>
+      <div class="timeline-date">2015</div>
+    </div>
+    <div class="timeline-content">
+      Закончил государственный университет экономики статистики и информатики. Защитил диплом — Управление организацией
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-header">
+      <div class="timeline-title">Пробую себя в бизнесе</div>
+      <div class="timeline-date">2016</div>
+    </div>
+    <div class="timeline-content">
+      На заработанные и отложенные деньги открыл небольшую точку "кофе с собой" в которой был и поваром и кассиром и бухгалтером и предпринимателем. Прогорел за несколько месяцев.
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-header">
+      <div class="timeline-title">Коммерческий директор</div>
+      <div class="timeline-date">2017-2020</div>
+    </div>
+    <div class="timeline-content">
+      Ушел работать по специальности, начинал с управляющего, закончил заместителем руководителя.
+    </div>
+  </div>
+
+  <div class="timeline-item item-active">
+    <div class="timeline-header">
+      <div class="timeline-title">Поворотный момент в карьере</div>
+      <div class="timeline-date">2020</div>
+    </div>
+    <div class="timeline-content">
+      Долгие годы программирование было моим хобби, решил что хобби может стать делом всей жизни. Ушел работать фронтенд разработчиком, первой работой было — верстка и разработка сайтов на WordPress
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-header">
+      <div class="timeline-title">Состоявшийся разработчик</div>
+      <div class="timeline-date">2024</div>
+    </div>
+    <div class="timeline-content">
+      Успел поработать в таких крупных компаниях — Коммерсантъ, Л`этуаль, Камаз. Учавствовал в разработке разных проектов — сложные маркет-плейсы или система анализа всех расходов электоробуса по конкретному маршруту следования.
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-header">
+      <div class="timeline-title">Фронтенд тим-лид</div>
+      <div class="timeline-date">2025</div>
+    </div>
+    <div class="timeline-content">
+      На текущий момент являюсь тимлидом в крупной компании, разрабтывает B2B-портал с нуля. Руковожу командой из 4-х разработчиков.
+    </div>
+  </div>
+  
+  <div class="timeline-item">
+    <div class="timeline-header">
+      <div class="timeline-title">Мы здесь</div>
+      <div class="timeline-date">∞</div>
+    </div>
+    <div class="timeline-content">
+      Пробую себя в блогинге, веду телеграм канал (кстати подписывайтесь!) пишу статьи на различных площадках включая свой персональный сайт
+    </div>
+  </div>
+  
+</div>
+
+<style>
+    .timeline {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      position: relative;
+    }
+
+    /* Main timeline vertical bar */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 24px; /* Adjusted to align with dot center */
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--l-bg-purple);
+    }
+
+    .timeline-item {
+      color: #000;
+      position: relative;
+      padding: 20px;
+      margin: 30px 0;
+      margin-left: 35px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Circle connector */
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -29px; /* Adjusted to center on bar */
+      top: 24px;
+      width: 12px;
+      height: 12px;
+      background: var(--l-bg-purple);
+      border-radius: 50%;
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+
+    /* Horizontal connector line */
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: -17px; /* Adjusted to connect from dot edge */
+      top: 29px;
+      width: 17px;
+      height: 2px;
+      background: var(--l-bg-purple);
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .timeline-date {
+      font-size: 0.875rem;
+    }
+
+    .timeline-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+
+    .timeline-content {
+      line-height: 1.5;
+    }
+
+    .timeline-item:nth-child(1) {
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), rgba(251, 146, 60, 1));
+    }
+
+    .timeline-item:nth-child(2) {
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), rgba(167, 139, 250, 1));
+    }
+
+    .timeline-item:nth-child(3) {
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), rgba(167, 139, 250, 1));
+    }
+
+    .timeline-item:nth-child(4) {
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), rgba(167, 139, 250, 1));
+    }
+
+    .timeline-item:nth-child(5) {
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), rgba(251, 146, 60, 1));
+    }
+
+    .timeline-item:nth-child(6) {
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), rgba(147, 197, 253, 1));
+    }
+
+    .timeline-item:nth-child(7) {
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), rgba(167, 139, 250, 1));
+    }
+
+    .timeline-item:nth-child(8) {
+      background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), rgba(251, 146, 60, 1));
+    }
+
+    .timeline-item:hover::before {
+      background: #2563eb;
+      transform: scale(1.2);
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    }
+
+    @media (max-width: 640px) {
+      .timeline::before {
+        left: 19px; /* Adjusted for mobile alignment */
+      }
+
+      .timeline-item {
+        margin-left: 30px;
+      }
+
+      .timeline-item::before {
+        left: -24px; /* Adjusted for mobile alignment */
+      }
+
+      .timeline-item::after {
+        left: -12px;
+        width: 12px;
+      }
+
+      .timeline-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .timeline-date {
+        margin-top: 4px;
+        font-size: 0.813rem;
+      }
+</style>

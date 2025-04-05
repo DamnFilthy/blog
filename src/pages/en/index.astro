@@ -2,6 +2,13 @@
 import BaseEnLayout from "../../layouts/BaseEnLayout.astro";
 import GradientText from "../../components/shared/GradientText.astro";
 import MainLogo from "../../components/icons/MainLogo.svg";
+import FormattedDate from "../../components/FormattedDate.astro";
+
+import { getCollection } from "astro:content";
+import { sortPosts } from "../../utils/sort";
+
+const posts = await getCollection("blogEn", ({ data }) => data.pubDate);
+const sortedPosts = sortPosts(posts.slice(0, 3));
 ---
 
 <BaseEnLayout
@@ -32,6 +39,40 @@ import MainLogo from "../../components/icons/MainLogo.svg";
         Here you will find ideas for your projects and career🚀
       </p>
     </div>
+  </div>
+
+  <div class="mt-10 mb-10 w-full">
+    <h2
+      class="text-xl font-bold tracking-tight md:text-3xl"
+      style="margin-bottom: 30px;"
+    >
+      Fresh
+    </h2>
+
+    <ul
+      class="flex flex-wrap items-center justify-center lg:justify-between gap-2"
+    >
+      {
+        sortedPosts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}/`}>
+              <img
+                width={320}
+                height={360}
+                src={post.data.heroImage}
+                alt="post image"
+              />
+
+              <h4 class="title">{post.data.title}</h4>
+
+              <p class="date">
+                <FormattedDate date={post.data.pubDate} /> {post.data.time}
+              </p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </BaseEnLayout>
 

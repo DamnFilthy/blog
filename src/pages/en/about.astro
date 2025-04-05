@@ -1,74 +1,269 @@
 ---
-import Layout from "../../layouts/BlogPost.astro";
-import { navEnLinks } from "../../configs/navMenu";
+import { navLinks } from "../../configs/navMenu";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import TimeLineEn from "../../components/widgets/TimeLineEn.astro";
 ---
 
-<Layout
-  title="About Me"
-  description="Lorem ipsum dolor sit amet"
-  pubDate={new Date("August 08 2021")}
-  heroImage="/images/blog-placeholder-about.jpg"
-  navLinks={navEnLinks}
+<BaseLayout
+  title="Aboout Me"
+  description="about description"
+  navLinks={navLinks}
 >
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo
-    integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis
-    egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In
-    hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat.
-    Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu
-    non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim.
-    Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed
-    vulputate mi. Dictumst quisque sagittis purus sit amet.
-  </p>
+  <section class="about">
+    <h1 class="font-bold" style="margin-bottom: 30px;">Me and my stack</h1>
+    <div class="stack">
+      <img src="/images/my-photo.avif" alt="Моя фотография" />
+      <div class="stack-text">
+        <p>Hello! My name is Alexander and I am a frontend developer.</p>
+        <p>
+          I have been interested in programming since childhood, but I decided
+          to connect my life with programming at a conscious age
+        </p>
 
-  <p>
-    Morbi tristique senectus et netus. Id semper risus in hendrerit gravida
-    rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus
-    sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris
-    rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus
-    dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-    massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius
-    morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras
-    ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est
-    ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa
-    ultricies mi.
-  </p>
+        <p>
+          <ul>
+            Technologies I use:
 
-  <p>
-    Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque.
-    Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac
-    felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit
-    amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed
-    elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-    dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra.
-    Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum
-    consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus
-    ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-    facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed
-    risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor
-    vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus
-    non. Amet dictum sit amet justo donec enim.
-  </p>
+            <li class="flex gap-3 items-center">
+              <b>1. JavaScript</b>
+              <svg
+                width="40"
+                height="40"
+                id="Lager_1"
+                style="enable-background:new 0 0 128 128;"
+                version="1.1"
+                viewBox="0 0 128 128"
+                xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                ><g
+                  ><g
+                    ><g
+                      ><circle cx="64" cy="64" r="50" style="fill:#F0DB4F;"
+                      ></circle></g
+                    ></g
+                  ><g id="Layer_1_1_"
+                    ><g
+                      ><g
+                        ><path
+                          d="M48.4,44.6h8.7v24.5c0,11-5.3,14.9-13.7,14.9c-2.1,0-4.7-0.3-6.4-0.9l1-7.1      c1.2,0.4,2.8,0.7,4.5,0.7c3.7,0,6-1.7,6-7.6L48.4,44.6L48.4,44.6z"
+                          style="fill:#323330;"></path><path
+                          d="M64.8,74.4c2.3,1.2,6,2.4,9.7,2.4c4,0,6.1-1.7,6.1-4.3c0-2.4-1.8-3.8-6.5-5.4      c-6.4-2.3-10.7-5.9-10.7-11.6C63.4,49,69,44,78.1,44c4.4,0,7.6,0.9,9.9,2l-2,7c-1.5-0.7-4.3-1.8-8-1.8c-3.8,0-5.6,1.8-5.6,3.7      c0,2.5,2.1,3.6,7.2,5.5c6.8,2.5,10,6.1,10,11.6c0,6.5-4.9,12-15.6,12c-4.4,0-8.8-1.2-11-2.4L64.8,74.4z"
+                          style="fill:#323330;"></path></g
+                      ></g
+                    ></g
+                  ></g
+                ></svg
+              >
+            </li>
 
-  <p>
-    Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac
-    ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem
-    viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu
-    ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac
-    tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-    pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim
-    sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam.
-    Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
-  </p>
+            <li class="flex gap-3 items-center">
+              <b>2. TypeScript</b>
+              <svg
+                width="25"
+                height="25"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                version="1.1"
+                id="Capa_1"
+                viewBox="0 0 24 24"
+                style="enable-background:new 0 0 24 24;"
+                xml:space="preserve"
+                width="512"
+                height="512"
+                fill="blue"
+                ><g
+                  ><path
+                    fill="blue"
+                    d="M21.656,0H2.344C1.05,0,0,1.05,0,2.344v19.312C0,22.95,1.05,24,2.344,24h19.312C22.95,24,24,22.95,24,21.656V2.344   C24,1.05,22.95,0,21.656,0z M13.922,13.316h-3.01v8.574H8.527v-8.574H5.531v-1.926h8.391V13.316z M21.698,20.37   c-0.467,0.835-1.325,1.305-2.238,1.5c-1.06,0.226-2.187,0.214-3.25,0.015c-0.521-0.098-0.972-0.244-1.353-0.44v-2.347   c0.426,0.357,0.888,0.625,1.387,0.803c0.499,0.179,1.003,0.268,1.511,0.268c0.45,0,0.951-0.056,1.339-0.304   c0.266-0.17,0.444-0.438,0.444-0.759c0-0.437-0.316-0.767-0.657-0.997c-0.499-0.336-1.072-0.555-1.625-0.785   c-0.822-0.342-1.434-0.76-1.838-1.254c-0.702-0.859-0.817-2.231-0.275-3.201c0.463-0.828,1.316-1.316,2.216-1.533   c0.981-0.236,2.046-0.236,3.041-0.081c0.423,0.066,0.813,0.167,1.17,0.304v2.193c-0.176-0.122-0.368-0.23-0.576-0.322   c-0.41-0.183-0.853-0.307-1.298-0.367c-0.445-0.06-0.914-0.07-1.353,0.033c-0.346,0.08-0.71,0.241-0.91,0.55   c-0.083,0.13-0.125,0.275-0.125,0.436c0,0.176,0.046,0.334,0.139,0.473c0.235,0.353,0.649,0.58,1.02,0.763   c0.652,0.32,1.336,0.56,1.962,0.931c0.608,0.359,1.148,0.859,1.412,1.525c0.127,0.32,0.191,0.693,0.191,1.118   C22.031,19.479,21.92,19.972,21.698,20.37z"
+                  ></path></g
+                ></svg
+              >
+            </li>
 
-  <p>
-    Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus
-    imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu
-    cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum.
-    Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit
-    libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed
-    pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique
-    magna.
-  </p>
-</Layout>
+            <li class="flex gap-3 items-center">
+              <b>3. HTML</b>
+              <svg
+                enable-background="new 0 0 32 32"
+                width="30"
+                height="30"
+                id="Layer_1"
+                version="1.0"
+                viewBox="0 0 32 32"
+                xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                ><g
+                  ><polygon
+                    fill="#E44D26"
+                    points="27.377,28.889 16.001,32 4.625,28.889 2,0 30.002,0  "
+                  ></polygon><polygon
+                    fill="#FF6C39"
+                    points="16,2 16,29.75 25.232,27.008 27.688,2  "
+                  ></polygon><polygon
+                    fill="#FFFFFF"
+                    points="24.363,6 7.607,6 8,10 8.619,17 19.503,17 19.148,20.984 16,21.99 12.857,20.984 12.648,19    8.803,19 9.262,23.987 16,25.99 22.728,23.986 23.718,13 12.252,13 12.002,10 24,10  "
+                  ></polygon></g
+                ><g></g><g></g><g></g><g></g><g></g><g></g></svg
+              >
+            </li>
+
+            <li class="flex gap-3 items-center">
+              <b>4. CSS</b>
+              <svg
+                height="30px"
+                id="Layer_1"
+                style="enable-background:new 0 0 64 64;"
+                version="1.1"
+                viewBox="0 0 64 64"
+                width="30px"
+                xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                ><g id="Shape_29_"
+                  ><g
+                    ><circle cx="32" cy="32" r="32" style="fill:#48A0DC;"
+                    ></circle></g
+                  ></g
+                ><g id="Css_3_Logo"
+                  ><g
+                    ><polygon
+                      points="47.329,20.604 48,14 31.148,14 14,14 14.819,20.604 31.148,20.604 32.066,20.604     31.148,20.985 15.416,27.508 15.938,33.965 31.148,34.013 39.301,34.039 38.779,42.648 31.148,44.786 31.148,44.779     31.086,44.797 23.717,42.945 23.27,37.601 23.245,37.601 16.409,37.601 16.386,37.601 17.28,47.918 31.148,52.001 31.148,51.993     31.174,52.001 44.968,47.992 46.758,27.508 31.148,27.508 31.11,27.508 31.148,27.491   "
+                      style="fill:#FFFFFF;"></polygon></g
+                  ></g
+                ><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g
+                ></g><g></g><g></g><g></g><g></g><g></g><g></g></svg
+              >
+            </li>
+
+            <li class="flex gap-3 items-center">
+              <b>5. Vue.js</b>
+              <svg
+                fill="green"
+                height="30px"
+                width="30px"
+                viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg"
+                ><title></title><polygon
+                  points="256 144.03 200.51 47.92 121.08 47.92 256 281.61 390.92 47.92 311.49 47.92 256 144.03"
+                ></polygon><polygon
+                  points="409.4 47.92 256 313.61 102.6 47.92 15.74 47.92 256 464.08 496.26 47.92 409.4 47.92"
+                ></polygon></svg
+              >
+            </li>
+
+            <li class="flex gap-3 items-center">
+              <b>6. Nuxt.js</b>
+              <svg
+                width="30px"
+                height="30px"
+                fill="greenyellow"
+                role="img"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                ><title></title><path
+                  d="M19.724 20.272l.023-.045a.74.74 0 0 0 .053-.117l.002-.005a1.16 1.16 0 0 0 .054-.607l.001.007a1.795 1.795 0 0 0-.235-.623l.005.008-5.317-9.353-.812-1.42-.807 1.42-5.314 9.353a1.85 1.85 0 0 0-.204.604l-.001.011a1.257 1.257 0 0 0 .08.713l-.003-.008a.809.809 0 0 0 .05.102l-.002-.004c.16.275.5.602 1.25.602h9.898c.157 0 .925-.032 1.28-.637zm-6.227-9.316l4.859 8.548H8.64zm10.249 7.934L16.73 6.53c-.072-.13-.477-.787-1.182-.787-.317 0-.772.135-1.142.785l-.907 1.59.807 1.42 1.25-2.212 6.941 12.18h-2.64a1.187 1.187 0 0 1-.058.608l.003-.008a.772.772 0 0 1-.057.126l.002-.004-.023.045c-.355.605-1.122.637-1.272.637h4.129c.152 0 .917-.032 1.272-.637.157-.275.27-.737-.107-1.382zM7.304 20.307a.989.989 0 0 1-.045-.092l-.002-.006a1.228 1.228 0 0 1-.084-.712l-.001.007H1.501L9.93 4.672l2.767 4.864.802-1.42-2.412-4.249c-.067-.122-.475-.777-1.177-.777-.317 0-.772.137-1.142.787L.23 18.889c-.072.13-.425.812-.075 1.417.16.275.5.602 1.25.602h7.151c-.745 0-1.09-.322-1.25-.602z"
+                ></path></svg
+              >
+            </li>
+
+            <li class="flex gap-3 items-center">
+              <b>7. Docker</b>
+              <svg
+                height="30px"
+                style="enable-background:new 0 0 512 512;"
+                version="1.1"
+                viewBox="0 0 512 512"
+                width="30px"
+                xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                ><g id="_x39_7-docker"
+                  ><g
+                    ><g
+                      ><rect
+                        height="43.193"
+                        style="fill:#099CEC;"
+                        width="47.506"
+                        x="229.999"
+                        y="147.225"></rect><rect
+                        height="42.69"
+                        style="fill:#099CEC;"
+                        width="47.506"
+                        x="229.999"
+                        y="199.115"></rect><rect
+                        height="43.193"
+                        style="fill:#099CEC;"
+                        width="47.506"
+                        x="173.869"
+                        y="147.225"></rect><rect
+                        height="42.691"
+                        style="fill:#099CEC;"
+                        width="47.507"
+                        x="286.2"
+                        y="199.043"></rect><rect
+                        height="43.625"
+                        style="fill:#099CEC;"
+                        width="47.506"
+                        x="229.999"
+                        y="94.975"></rect><rect
+                        height="43.193"
+                        style="fill:#099CEC;"
+                        width="47.505"
+                        x="117.738"
+                        y="147.225"></rect><rect
+                        height="42.691"
+                        style="fill:#099CEC;"
+                        width="47.506"
+                        x="173.869"
+                        y="199.043"></rect><path
+                        d="M476.441,219.095c-10.35-6.972-34.21-9.487-52.537-6.036     c-2.371-17.249-12.003-32.27-29.538-45.782l-10.062-6.685l-6.685,10.062c-13.225,19.98-16.817,52.896-2.658,74.602     c-6.252,3.377-18.545,7.978-34.786,7.689H27.757c-6.252,36.511,4.169,83.945,31.624,116.501     c26.663,31.551,66.623,47.579,118.872,47.579c113.124,0,196.851-52.104,236.021-146.76c15.381,0.288,48.584,0.073,65.618-32.483     c1.078-1.797,4.743-9.488,6.107-12.291L476.441,219.095z"
+                        style="fill:#099CEC;"></path><polygon
+                        points="109.186,199.043 109.113,199.043 61.68,199.043 61.68,241.734 109.186,241.734    "
+                        style="fill:#099CEC;"></polygon><rect
+                        height="42.691"
+                        style="fill:#099CEC;"
+                        width="47.505"
+                        x="117.738"
+                        y="199.043"></rect></g
+                    ></g
+                  ></g
+                ><g id="Layer_1"></g></svg
+              >
+            </li>
+          </ul>
+        </p>
+      </div>
+    </div>
+
+    <h2 class="font-bold">My way</h2>
+    <TimeLineEn />
+  </section>
+</BaseLayout>
+
+<style>
+  .stack {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 10px;
+
+    @media (max-width: 670px) {
+      flex-direction: column;
+    }
+  }
+
+  .stack-text {
+    max-width: 500px;
+  }
+
+  .about {
+    max-width: 800px;
+    margin: 0 auto;
+
+    li:not(:last-child) {
+      margin-bottom: 3px;
+    }
+  }
+</style>
