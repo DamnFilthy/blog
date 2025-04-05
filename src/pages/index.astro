@@ -2,6 +2,13 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import GradientText from "../components/shared/GradientText.astro";
 import MainLogo from "../components/icons/MainLogo.svg";
+import BlogCard from "../components/shared/BlogCard.astro";
+
+import { getCollection } from "astro:content";
+import { sortPosts } from "../utils/sort";
+
+const posts = await getCollection("blog", ({ data }) => data.pubDate);
+const sortedPosts = sortPosts(posts.slice(0, 3));
 ---
 
 <BaseLayout
@@ -32,6 +39,13 @@ import MainLogo from "../components/icons/MainLogo.svg";
         Здесь вы найдете идеи для своих проектов и карьеры 🚀
       </p>
     </div>
+  </div>
+
+  <div class="mb-16 w-full">
+    <h2 class="mb-4 text-xl font-bold tracking-tight md:text-3xl">Writing</h2>
+    <ul class="flex flex-col gap-2">
+      {sortedPosts.map((post) => <div> {post.data.title}</div>)}
+    </ul>
   </div>
 </BaseLayout>
 
