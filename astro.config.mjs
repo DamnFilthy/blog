@@ -17,5 +17,9 @@ export default defineConfig({
   
   vite: {
     plugins: [tailwindcss(), pagefind(), (await import("@playform/compress")).default(), compressor()],
+  },
+
+  experimental: {
+    svg: true,
   }
 });

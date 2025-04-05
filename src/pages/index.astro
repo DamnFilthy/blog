@@ -1,48 +1,80 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import GradientText from "../components/shared/GradientText.astro";
+import MainLogo from "../components/icons/MainLogo.svg";
 ---
 
-<BaseLayout title="Home page" description="Site home page">
-  <h1>🧑‍🚀 Привет, Астронавт!</h1>
-  <p>
-    Welcome to the official <a href="https://astro.build/">Astro</a> blog starter
-    template. This template serves as a lightweight, minimally-styled starting point
-    for anyone looking to build a personal website, blog, or portfolio with Astro.
-  </p>
-  <p>
-    This template comes with a few integrations already configured in your
-    <code>astro.config.mjs</code> file. You can customize your setup with
-    <a href="https://astro.build/integrations">Astro Integrations</a> to add tools
-    like Tailwind, React, or Vue to your project.
-  </p>
-  <p>Here are a few ideas on how to get started with the template:</p>
-  <ul>
-    <li>Edit this page in <code>src/pages/index.astro</code></li>
-    <li>
-      Edit the site header items in <code>src/components/Header.astro</code>
-    </li>
-    <li>
-      Add your name to the footer in <code>src/components/Footer.astro</code>
-    </li>
-    <li>
-      Check out the included blog posts in <code>src/content/blog/</code>
-    </li>
-    <li>
-      Customize the blog post page layout in <code
-        >src/layouts/BlogPost.astro</code
-      >
-    </li>
-  </ul>
-  <p>
-    Have fun! If you get stuck, remember to
-    <a href="https://docs.astro.build/">read the docs</a>
-    or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-  </p>
-  <p>
-    Looking for a blog template with a bit more personality? Check out
-    <a href="https://github.com/Charca/astro-blog-template"
-      >astro-blog-template</a
-    >
-    by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-  </p>
+<BaseLayout
+  title="Shiryaev.io блог о веб разаботке"
+  description="Shiryaev.io блог о веб разаботке, javascript, typescript, vue, nuxt"
+>
+  <div
+    class="main-page-block flex flex-col-reverse justify-between gap-5 xl:flex-row items-center"
+  >
+    <MainLogo class="main-logo" />
+
+    <div class="max-w-[600px] composition">
+      <p class="main-title">
+        <GradientText
+          >Программирование это просто, когда есть отличный помощник
+        </GradientText>
+        🧑‍💻
+      </p>
+
+      <p class="main-text">
+        Shiryaev.io – Блог о программировании для разработчиков всех уровней,
+        тут вы найдете полезные статьи по программированию, готовые компоненты и
+        примеры кода на Javascript, Typescript, Vue, Nuxt, советы по веб-работке
+        и многое другое
+      </p>
+
+      <p class="main-text">
+        Здесь вы найдете идеи для своих проектов и карьеры 🚀
+      </p>
+    </div>
+  </div>
 </BaseLayout>
+
+<style>
+  .main-page-block {
+    padding-top: 100px;
+
+    @media (max-width: 1250px) {
+      padding-top: 30px;
+    }
+
+    @media (max-width: 768px) {
+      padding-top: 0;
+    }
+  }
+  .main-title {
+    font-size: 45px;
+    line-height: 1;
+    font-weight: bold;
+  }
+  @media (max-width: 768px) {
+    .main-logo {
+      width: 400px;
+      height: 300px;
+    }
+  }
+
+  @media (max-width: 575px) {
+    .main-logo {
+      width: 300px;
+    }
+    .main-title {
+      font-size: 40px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .main-title {
+      font-size: 30px;
+    }
+
+    .main-text {
+      font-size: 14px;
+    }
+  }
+</style>

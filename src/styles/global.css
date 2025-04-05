@@ -139,6 +139,12 @@ hr {
 	}
 }
 
+@media (max-width: 425px) {
+	main {
+		padding: 1rem;
+	}
+}
+
 .sr-only {
 	border: 0;
 	padding: 0;
