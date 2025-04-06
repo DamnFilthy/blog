@@ -9,6 +9,7 @@ import { sortPosts } from "../utils/sort";
 
 const posts = await getCollection("blog", ({ data }) => data.pubDate);
 const sortedPosts = sortPosts(posts.slice(0, 3));
+console.log(sortedPosts);
 ---
 
 <BaseLayout
@@ -50,12 +51,15 @@ const sortedPosts = sortPosts(posts.slice(0, 3));
     </h2>
 
     <ul
-      class="flex flex-wrap items-center justify-center lg:justify-between gap-2"
+      class="flex flex-wrap items-start justify-center lg:justify-between gap-2"
     >
       {
         sortedPosts.map((post) => (
           <li>
-            <a href={`/blog/${post.id}/`}>
+            <a
+              href={`/blog/${post.id}/`}
+              class="min-h-[280px] flex flex-col justify-between"
+            >
               <img
                 width={320}
                 height={360}
@@ -65,10 +69,10 @@ const sortedPosts = sortPosts(posts.slice(0, 3));
 
               <h4 class="title">{post.data.title}</h4>
 
-              <p class="date">
+              <div class="flex items-center justify-between">
                 <FormattedDate date={post.data.pubDate} />
                 <FormattedTime time={post.data.time} />
-              </p>
+              </div>
             </a>
           </li>
         ))
@@ -89,6 +93,13 @@ const sortedPosts = sortPosts(posts.slice(0, 3));
       padding-top: 0;
     }
   }
+
+  .title {
+    margin-top: 10px;
+    font-size: 25px;
+    max-width: 320px;
+  }
+
   .main-title {
     font-size: 45px;
     line-height: 1;

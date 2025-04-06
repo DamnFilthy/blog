@@ -2,7 +2,9 @@
 import BaseEnLayout from "../../layouts/BaseEnLayout.astro";
 import GradientText from "../../components/shared/GradientText.astro";
 import MainLogo from "../../components/icons/MainLogo.svg";
+
 import FormattedDate from "../../components/FormattedDate.astro";
+import FormattedTime from "../../components/FormattedTime.astro";
 
 import { getCollection } from "astro:content";
 import { sortPosts } from "../../utils/sort";
@@ -50,7 +52,7 @@ const sortedPosts = sortPosts(posts.slice(0, 3));
     </h2>
 
     <ul
-      class="flex flex-wrap items-center justify-center lg:justify-between gap-2"
+      class="flex flex-wrap items-start justify-center lg:justify-between gap-2"
     >
       {
         sortedPosts.map((post) => (
@@ -65,9 +67,10 @@ const sortedPosts = sortPosts(posts.slice(0, 3));
 
               <h4 class="title">{post.data.title}</h4>
 
-              <p class="date">
-                <FormattedDate date={post.data.pubDate} /> {post.data.time}
-              </p>
+              <div class="flex items-center justify-between">
+                <FormattedDate date={post.data.pubDate} />
+                <FormattedTime time={post.data.time} />
+              </div>
             </a>
           </li>
         ))
@@ -87,6 +90,10 @@ const sortedPosts = sortPosts(posts.slice(0, 3));
     @media (max-width: 768px) {
       padding-top: 0;
     }
+  }
+
+  .title {
+    max-width: 320px;
   }
 
   .main-title {
