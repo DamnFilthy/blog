@@ -57,10 +57,14 @@ const sortedPosts = sortPosts(posts.slice(0, 3));
       {
         sortedPosts.map((post) => (
           <li>
-            <a href={`/blog/${post.id}/`}>
+            <a
+              href={`/blog/${post.id}/`}
+              class="min-h-[280px] flex flex-col justify-between"
+            >
               <img
+                class="post-item-image"
                 width={320}
-                height={360}
+                height={160}
                 src={post.data.heroImage}
                 alt="post image"
               />
@@ -80,8 +84,12 @@ const sortedPosts = sortPosts(posts.slice(0, 3));
 </BaseEnLayout>
 
 <style>
+  .post-item-image {
+    object-fit: cover;
+    height: 160px;
+  }
   .main-page-block {
-    padding-top: 100px;
+    padding-top: 80px;
 
     @media (max-width: 1250px) {
       padding-top: 30px;
@@ -93,11 +101,13 @@ const sortedPosts = sortPosts(posts.slice(0, 3));
   }
 
   .title {
+    margin-top: 10px;
+    font-size: 25px;
     max-width: 320px;
   }
 
   .main-title {
-    font-size: 55px;
+    font-size: 45px;
     line-height: 1;
     font-weight: bold;
   }

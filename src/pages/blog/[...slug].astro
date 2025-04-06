@@ -23,6 +23,12 @@ const { Content } = await render(post);
 
 <style is:inline>
   .article-post {
+    p:has(img) {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
     h1 {
       font-weight: bold;
       margin-bottom: 20px;

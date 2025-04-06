@@ -1,0 +1,76 @@
+---
+title: 'Snippets'
+description: 'Snippets in vscode typescript vue 3'
+pubDate: 'Apr 04 2025'
+heroImage: '/images/snippets.avif'
+time: '2 min'
+---
+
+# Snippets in VSCode
+
+![snippets](/images/snippets.avif)
+
+Day after day, time after time, we write boilerplate code, and how great it would be to automate this process. The simplest way is to use **snippets**.
+
+I searched for a ready-made solution for Vue 3 but couldn't find what I needed. Instead of digging through plugins, I decided to create my own set of snippets, and it turned out to be very simple in VSCode.
+
+**VSCode**
+
+1. Ctrl + Shift + P
+2. Select "Snippets: Configure User Snippets"
+3. Choose an existing file or create a new global file or one specific to the current project
+4. Write your snippet
+
+## Format and Examples
+
+```javascript
+{
+	"Vue 3 Component with TS base props and SCSS Module": {
+		"prefix": "v3c",
+		"body": [
+			"<script setup lang=\"ts\">",
+			"defineProps<{",
+			"    testProp?: boolean;",
+			"}>();",
+			"</script>",
+			"",
+			"<template>",
+			"    <div :class=\"\\$style[`${1:component-name}`]\"></div>",
+			"</template>",
+			"",
+			"<style src=\"./${1:component-name}.scss\" lang=\"scss\" module />"
+		],
+		"description": "Vue 3 component template with TypeScript and SCSS module"
+	},
+	"Vue 3 Component with TS, with default props, and SCSS Module": {
+		"prefix": "v3cd",
+		"body": [
+			"<script setup lang=\"ts\">",
+			"withDefaults(",
+			"    defineProps<{",
+			"        testProp?: boolean;",
+			"    }>(),",
+			"    {",
+			"        testProp: false",
+			"    }",
+			");",
+			"</script>",
+			"",
+			"<template>",
+			"    <div :class=\"\\$style[`${1:component-name}`]\"></div>",
+			"</template>",
+			"",
+			"<style src=\"./${1:component-name}.scss\" lang=\"scss\" module />"
+		],
+		"description": "Vue 3 component template with TypeScript, props, and SCSS module"
+	}
+}
+```
+
+## Conclusion
+
+Automating routine tasks is one of the key ways to boost development productivity. Snippets in VSCode are a simple yet powerful tool that can significantly speed up the process of writing boilerplate code. In the case of Vue 3, where you often need to create components with TypeScript and SCSS modules, using snippets becomes almost a necessity.
+
+These snippets not only save time but also help avoid errors related to typos or incorrect code structure. You can adapt them to your needs by adding new props, methods, or styles.
+
+Thus, even small efforts to customize your development environment can lead to significant improvements in your workflow. Try creating your own snippets and see how convenient and efficient it is! 🚀

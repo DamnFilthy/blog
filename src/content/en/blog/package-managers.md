@@ -1,7 +1,7 @@
 ---
 title: 'Package managers'
 description: "Let's discuss the most popular package managers for javascript"
-pubDate: 'Apr 06 2025'
+pubDate: 'Apr 04 2025'
 heroImage: '/images/package.avif'
 time: '3 min'
 ---
