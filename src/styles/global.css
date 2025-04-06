@@ -187,6 +187,9 @@ hr {
 	border-left: 1px solid rgb(200, 200, 200) !important;
 	border-bottom: 1px solid rgb(200, 200, 200) !important;
 	border-radius: 10px !important;
+	max-height: 550px !important;
+    overflow: hidden !important;
+    overflow-y: scroll !important;
 }
 
 html.dark .pagefind-ui__drawer {
