@@ -11,6 +11,8 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = "/images/logo-mini.png" } = Astro.props;
+
+const isProd = import.meta.env.PROD;
 ---
 
 <!-- Global Metadata -->
@@ -49,7 +51,7 @@ const { title, description, image = "/images/logo-mini.png" } = Astro.props;
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
 <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
+{ isProd ? <script type="text/javascript">
   (function (m, e, t, r, i, k, a) {
     m[i] =
       m[i] ||
@@ -82,6 +84,7 @@ const { title, description, image = "/images/logo-mini.png" } = Astro.props;
       style="position:absolute; left:-9999px;"
       alt=""
     />
-  </div></noscript
->
+  </div>
+  </noscript>
+  : null }
 <!-- /Yandex.Metrika counter -->

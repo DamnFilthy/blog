@@ -4,6 +4,7 @@ description: 'Nuxt super optimization with nuxt lazy components'
 pubDate: 'Apr 06 2025'
 heroImage: '/images/nuxt.avif'
 time: '4 min'
+tag: 'nuxt'
 ---
 
 # Unreal Optimization in Nuxt

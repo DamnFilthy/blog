@@ -4,6 +4,7 @@ description: 'Менеджеры пакетов'
 pubDate: 'Apr 04 2025'
 heroImage: '/images/package.avif'
 time: '3 мин'
+tag: 'общее'
 ---
 
 # Менеджеры пакетов: npm, Yarn, pnpm

@@ -4,6 +4,7 @@ description: "Let's discuss the most popular package managers for javascript"
 pubDate: 'Apr 04 2025'
 heroImage: '/images/package.avif'
 time: '3 min'
+tag: 'base'
 ---
 
 # Package Managers: npm, Yarn, pnpm
