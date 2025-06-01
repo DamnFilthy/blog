@@ -1,5 +1,7 @@
 ---
 import BaseEnLayout from "../../../layouts/BaseEnLayout.astro";
+import EnTagList from "../../../components/shared/EnTagList.astro";
+
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../../consts";
 import { getCollection } from "astro:content";
 
@@ -13,10 +15,12 @@ const posts = (await getCollection("blogEn")).sort(
 
 <BaseEnLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <section class="mb-20">
+    <EnTagList />
+
     <ul>
       {
         posts.map((post) => (
-          <li>
+          <li data-list-tag={post.data.tag}>
             <a href={`/blog/${post.id}/`}>
               <img
                 class="post-item-img"
@@ -27,6 +31,8 @@ const posts = (await getCollection("blogEn")).sort(
               />
 
               <h4 class="title">{post.data.title}</h4>
+
+              <div>#{post.data.tag}</div>
 
               <div class="flex justify-center items-center gap-5">
                 <FormattedDate date={post.data.pubDate} />

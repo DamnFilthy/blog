@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import RuTagList from "../../components/shared/RuTagList.astro";
+
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
 
@@ -9,52 +11,11 @@ import FormattedTime from "../../components/FormattedTime.astro";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
-
-const tags = (await getCollection("blog"))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .map((item) => item.data.tag);
-
-tags.push("all");
 ---
-
-<script>
-  const $tags = document.querySelectorAll("[data-item-tag]");
-  const $listItems = document.querySelectorAll("[data-list-tag]");
-
-  $tags.forEach((tag) => {
-    tag.addEventListener("click", (e) => {
-      const tagValue = e.target!.getAttribute("data-item-tag"),
-        $itemsToShow = document.querySelectorAll(`[data-list-tag=${tagValue}]`);
-
-      if (tagValue === "all") {
-        showItems($listItems);
-
-        return;
-      }
-
-      hideItems($listItems);
-      showItems($itemsToShow);
-    });
-  });
-
-  function hideItems(items) {
-    items.forEach((item) => {
-      item.style.display = "none";
-    });
-  }
-
-  function showItems(items) {
-    items.forEach((item) => {
-      item.style.display = "block";
-    });
-  }
-</script>
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <section class="mb-20">
-    <!-- <div>
-      {tags.map((tag) => <span data-item-tag={tag}>{tag}</span>)}
-    </div> -->
+    <RuTagList />
 
     <ul>
       {
@@ -70,6 +31,8 @@ tags.push("all");
               />
 
               <h4 class="title">{post.data.title}</h4>
+
+              <div>#{post.data.tag}</div>
 
               <div class="flex justify-center items-center gap-5">
                 <FormattedDate date={post.data.pubDate} />

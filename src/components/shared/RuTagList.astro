@@ -1,0 +1,94 @@
+---
+import { getCollection } from "astro:content";
+
+const tags = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .map((item) => item.data.tag);
+
+tags.push("Все");
+---
+
+<div class="tags-list">
+  {
+    tags.map((tag: string) => (
+      <span class="tag" data-item-tag={tag}>
+        {tag}
+      </span>
+    ))
+  }
+</div>
+
+<script>
+  const $tags = document.querySelectorAll("[data-item-tag]");
+  const $listItems = document.querySelectorAll("[data-list-tag]");
+
+  $tags.forEach((tag) => {
+    tag.addEventListener("click", (e) => {
+      setActiveClass($tags, tag);
+
+      const tagValue = e.target!.getAttribute("data-item-tag"),
+        $itemsToShow = document.querySelectorAll(`[data-list-tag=${tagValue}]`);
+
+      if (tagValue === "Все") {
+        showItems($listItems);
+
+        return;
+      }
+
+      hideItems($listItems);
+      showItems($itemsToShow);
+    });
+  });
+
+  function hideItems(items: HTMLElement[]) {
+    items.forEach((item) => {
+      item.style.display = "none";
+    });
+  }
+
+  function showItems(items: HTMLElement[]) {
+    items.forEach((item) => {
+      item.style.display = "block";
+    });
+  }
+
+  function setActiveClass(tags, tag) {
+    tags.forEach((item) => item.classList.remove("tag-active"));
+    tag.classList.add("tag-active");
+  }
+</script>
+
+<style>
+  .tags-list {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 10px;
+
+    @media (max-width: 360px) {
+      padding: 15px 0;
+    }
+  }
+
+  .tags-list .tag {
+    transition: 0.5s ease;
+    user-select: none;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 20px;
+    border-radius: 10px;
+    color: white;
+    background-color: #1194e7;
+
+    @media (max-width: 400px) {
+      font-size: 12px;
+    }
+
+    @media (max-width: 360px) {
+      font-size: 10px;
+    }
+  }
+
+  .tag-active {
+    background-color: #5bea56 !important;
+  }
+</style>
