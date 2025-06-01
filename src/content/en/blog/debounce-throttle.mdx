@@ -1,0 +1,221 @@
+---
+title: 'Debounce and Throttle'
+description: 'Debounce and Throttle in JavaScript: A Complete Guide for Developers'
+pubDate: 'May 01 2025'
+heroImage: '/images/debounce.png'
+time: '5 min'
+tag: 'JavaScript'
+---
+
+# Debounce and Throttle
+
+![debounce](/images/debounce.png)
+
+Today we'll look at two important concepts for optimizing performance - **debounce** and **throttle**. These techniques are especially useful when dealing with frequent events (e.g. scrolling, window resizing, typing in a search box)
+
+### Introduction: Why do we need debounce and throttle?
+
+When we work with events that can fire very frequently (e.g. **input**, **scroll**, **resize**), the handlers for these events can be called too many times, which leads to
+
+1. Excessive load on the browser
+2. Unnecessary calculations
+3. Possible interface slowdowns
+
+**Debounce** and **throttle** are two approaches to limiting the frequency of function calls in such scenarios
+
+## Debounce
+
+**Debounce** delays the execution of a function until a certain amount of time has passed since the last call. If the function is called again before that time has passed, the timer is reset
+
+Think of an elevator door - if people keep coming in, the door's closing timer is reset. The doors will only close when N seconds have passed since the last entry
+
+```javascript
+function debounce(func, delay) {
+  let timeoutId;
+  return function(...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+
+// Usage
+const handleInput = debounce((value) => {
+  console.log('Отправка запроса:', value);
+}, 500);
+
+inputElement.addEventListener('input', (e) => handleInput(e.target.value));
+```
+
+### When to use in Vue/Nuxt?
+
+1. Search fields (to avoid sending a request for each character input)
+2. Form validation (don't check for every input)
+3. Handling window resizing
+
+**Vue example with search**
+
+```javascript
+<template>
+  <input v-model="searchQuery" @input="handleSearch" placeholder="Поиск...">
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      searchQuery: ''
+    }
+  },
+  methods: {
+    handleSearch: _.debounce(function() {
+      this.fetchResults(this.searchQuery)
+    }, 300),
+    fetchResults(query) {
+      // API request with query
+    }
+  }
+}
+</script>
+```
+
+## Throttle
+
+**Throttle** ensures that the function will be called no more than once in the specified time interval, no matter how often the event occurs
+
+Like a traffic light - cars can only pass when the light is green, even if they arrive more often
+
+```javascript
+function throttle(func, limit) {
+  let inThrottle;
+  return function(...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+}
+
+// Usage
+const handleScroll = throttle(() => {
+  console.log('Обработка скролла');
+}, 200);
+
+window.addEventListener('scroll', handleScroll);
+```
+
+### When to use in Vue/Nuxt?
+
+1. Handling scrolling (infinite feed, lazy-loading)
+2. Dragging elements (drag-and-drop)
+3. Handling mouse movement (for example, for drawing)
+
+**Vue Infinite Scroll Example**
+
+```javascript
+<template>
+  <div @scroll="handleScroll">
+    <!-- Content -->
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    handleScroll: _.throttle(function() {
+      const bottomOfWindow = 
+        document.documentElement.scrollTop + window.innerHeight === 
+        document.documentElement.offsetHeight;
+      
+      if (bottomOfWindow) {
+        this.loadMoreItems();
+      }
+    }, 200),
+    loadMoreItems() {
+      // Loading additional items
+    }
+  }
+}
+</script>
+```
+
+### Differences between debounce and throttle
+ 
+
+| Characteristic | Debounce | Throttle | 
+|---------------------------|---------------------------------|--------------------------|
+| Call frequency | After a pause in events | No more often than X ms | 
+| Suitable for | Search by input, resize | Scroll, mouse movement | 
+| Does it guarantee execution? | No (if events continue) | Yes (but less often) |
+
+
+### Ready-made solutions for Vue/Nuxt
+
+1. **Lodash** popular library with great implementations of _.debounce and _.throttle
+2. **Vue-use** Composition API hook useDebounceFn and useThrottleFn
+3. **Custom directives** you can create v-debounce and v-throttle directives
+
+**Example with vue-use**
+
+```javascript
+import { useDebounceFn } from '@vueuse/core'
+
+export default {
+  setup() {
+    const searchQuery = ref('')
+    
+    const handleSearch = useDebounceFn(() => {
+      fetchResults(searchQuery.value)
+    }, 300)
+    
+    return { searchQuery, handleSearch }
+  }
+}
+```
+
+## Performance Tips
+
+1. Choose the **right** time intervals
+    - For searching: 300-500ms
+    - For scrolling: 100-200ms
+    - For resizing: 200ms
+2. **Cancel pending requests** on new call (for **API** requests)
+3. Use **leading/trailing** options (e.g. execute immediately, then throttle)
+
+## Cancel execution
+
+You can modify functions to be able to cancel **pending calls**
+
+**Example with cancellation**
+
+```javascript
+function cancellableDebounce(func, delay) {
+  let timeoutId;
+  const debounced = function(...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+  
+  debounced.cancel = () => {
+    clearTimeout(timeoutId);
+  };
+  
+  return debounced;
+}
+```
+
+### Conclusion
+
+**Debounce and throttle** are powerful tools for optimizing frequent events.
+
+In Vue/Nuxt applications, they are especially useful for
+
+1. Reducing the number of API requests
+2. Optimizing user input handling
+3. Improving scrolling and resizing performance
+
+Try applying these techniques in your project and see the difference in performance!

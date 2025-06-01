@@ -1,0 +1,219 @@
+---
+title: 'Debounce и Throttle'
+description: 'Debounce и Throttle в JavaScript: полное руководство для разработчиков'
+pubDate: 'May 01 2025'
+heroImage: '/images/debounce.png'
+time: '5 мин'
+tag: 'JavaScript'
+---
+
+# Debounce и Throttle
+
+![debounce](/images/debounce.png)
+
+Сегодня рассмотрим две важные концепции для оптимизации производительности - **debounce** и **throttle**. Эти техники особенно полезны при работе с частыми событиями (например, скролл, ресайз окна, ввод в поле поиска)
+
+### Введение: зачем нужны debounce и throttle?
+
+Когда мы работаем с событиями, которые могут срабатывать очень часто (например, **input**, **scroll**, **resize**), обработчики этих событий могут вызываться слишком много раз, что приводит к
+
+1. Избыточной нагрузке на браузер
+2. Ненужным вычислениям
+3. Возможным подтормаживаниям интерфейса
+
+**Debounce** и **throttle** - это два подхода к ограничению частоты вызова функций в таких сценариях
+
+## Debounce (устранение дребезга)
+
+**Debounce** откладывает выполнение функции до тех пор, пока не пройдет определенное время с момента последнего вызова. Если функция вызывается снова до истечения этого времени, таймер сбрасывается
+
+Представь дверь в лифте - если люди продолжают заходить, таймер закрытия двери сбрасывается. Двери закроются только когда пройдет N секунд после последнего входа
+
+```javascript
+function debounce(func, delay) {
+  let timeoutId;
+  return function(...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+
+// Использование
+const handleInput = debounce((value) => {
+  console.log('Отправка запроса:', value);
+}, 500);
+
+inputElement.addEventListener('input', (e) => handleInput(e.target.value));
+```
+
+### Когда использовать в Vue/Nuxt?
+
+1. Поля поиска (чтобы не отправлять запрос на каждый ввод символа)
+2. Валидация форм (не проверять на каждый ввод)
+3. Обработка изменения размеров окна
+
+**Vue-пример с поиском**
+
+```javascript
+<template>
+  <input v-model="searchQuery" @input="handleSearch" placeholder="Поиск...">
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      searchQuery: ''
+    }
+  },
+  methods: {
+    handleSearch: _.debounce(function() {
+      this.fetchResults(this.searchQuery)
+    }, 300),
+    fetchResults(query) {
+      // API запрос с query
+    }
+  }
+}
+</script>
+```
+
+## Throttle (троттлинг)
+
+**Throttle** гарантирует, что функция будет вызываться не чаще, чем один раз в указанный промежуток времени, независимо от того, как часто происходит событие
+
+Как светофор - машины могут проезжать только когда горит зеленый, даже если они подъезжают чаще
+
+```javascript
+function throttle(func, limit) {
+  let inThrottle;
+  return function(...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+}
+
+// Использование
+const handleScroll = throttle(() => {
+  console.log('Обработка скролла');
+}, 200);
+
+window.addEventListener('scroll', handleScroll);
+```
+
+### Когда использовать в Vue/Nuxt?
+
+1. Обработка скролла (бесконечная лента, lazy-loading)
+2. Перетаскивание элементов (drag-and-drop)
+3. Обработка перемещения мыши (например, для рисования)
+
+**Vue-пример с бесконечным скроллом**
+
+```javascript
+<template>
+  <div @scroll="handleScroll">
+    <!-- Контент -->
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    handleScroll: _.throttle(function() {
+      const bottomOfWindow = 
+        document.documentElement.scrollTop + window.innerHeight === 
+        document.documentElement.offsetHeight;
+      
+      if (bottomOfWindow) {
+        this.loadMoreItems();
+      }
+    }, 200),
+    loadMoreItems() {
+      // Загрузка дополнительных элементов
+    }
+  }
+}
+</script>
+```
+
+### Различия между debounce и throttle
+ 
+| Характеристика             | Debounce                        | Throttle                 | 
+|----------------------------|---------------------------------|--------------------------|
+| Частота вызова             | После паузы в событиях          | Не чаще чем X мс         | 
+| Подходит для               | Поиск по вводу, ресайз          | Скролл, перемещение мыши | 
+| Гарантирует ли выполнение? | Нет (если события продолжаются) | Да (но реже)             | 
+
+
+### Готовые решения для Vue/Nuxt
+
+1. **Lodash** популярная библиотека с отличными реализациями _.debounce и _.throttle
+2. **Vue-use** Composition API хук useDebounceFn и useThrottleFn
+3. **Собственные директивы** можно создать директивы v-debounce и v-throttle
+
+**Пример с vue-use**
+
+```javascript
+import { useDebounceFn } from '@vueuse/core'
+
+export default {
+  setup() {
+    const searchQuery = ref('')
+    
+    const handleSearch = useDebounceFn(() => {
+      fetchResults(searchQuery.value)
+    }, 300)
+    
+    return { searchQuery, handleSearch }
+  }
+}
+```
+
+## Советы по производительности
+
+1. Выбирай **правильные** временные интервалы
+    - Для поиска: 300-500ms
+    - Для скролла: 100-200ms
+    - Для ресайза: 200ms
+2. **Отменяй pending-запросы** при новом вызове (для **API** запросов)
+3. Используй **leading/trailing** варианты (например, выполнить сразу, потом троттлить)
+
+## Отмена выполнения
+
+Можно модифицировать функции для возможности отмены **pending-вызовов**
+
+**Пример с отменой**
+
+```javascript
+function cancellableDebounce(func, delay) {
+  let timeoutId;
+  const debounced = function(...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+  
+  debounced.cancel = () => {
+    clearTimeout(timeoutId);
+  };
+  
+  return debounced;
+}
+```
+
+### Заключение
+
+**Debounce и throttle** - мощные инструменты для оптимизации частых событий. 
+В Vue/Nuxt приложениях они особенно полезны для
+
+1. Уменьшения количества API запросов
+2. Оптимизации обработки пользовательского ввода
+3. Улучшения производительности при скролле и ресайзе
+
+Попробуй применить эти техники в своем проекте и посмотри на разницу в производительности!
