@@ -29,9 +29,5 @@ export default defineConfig({
         external: ['**/*.php'] // Не включать PHP-файлы в сборку
       }
     }
-  },
-
-  experimental: {
-    svg: true,
   }
 });

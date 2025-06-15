@@ -1,0 +1,151 @@
+---
+title: 'Iframe в веб-разработке: полное руководство'
+description: 'Iframe в веб-разработке: полное руководство'
+pubDate: 'June 15 2025'
+heroImage: '/images/iframe.png'
+time: '6 мин'
+tag: 'Браузер'
+---
+
+# Что такое iframe? 
+
+![debounce](/images/iframe.png)
+
+**\<iframe\>** (Inline Frame) — это HTML-элемент, который позволяет встраивать другую HTML-страницу или веб-приложение внутрь текущего документа
+
+### Основные сценарии использования
+
+1. Встраивание внешнего контента (YouTube, Google Maps, виджеты)
+2. Изоляция стороннего кода (например, платежные формы)
+3. Загрузка документов (PDF, HTML-отчеты)
+4. Микросервисная архитектура (взаимодействие между независимыми приложениями)
+
+### Базовый пример iframe
+
+Самый простой способ вставить **iframe**
+
+```html
+<iframe 
+  src="https://example.com" 
+  width="600" 
+  height="400"
+  title="Пример iframe"
+></iframe>
+```
+
+Атрибуты **iframe**
+
+1. **src** — URL загружаемого контента
+2. **width / height** — размеры фрейма
+3. **frameborder** (уже устарел) — лучше управлять через CSS (border: none)
+4. **allow** — политики безопасности (камера, микрофон, платежи)
+5. **sandbox** — ограничение прав iframe (запрет скриптов, форм и т. д.)
+
+### Пример: динамическая загрузка контента 
+
+```vue
+<template>
+  <div>
+    <input v-model="iframeUrl" placeholder="Введите URL (например, https://vuejs.org)" />
+    <button @click="loadIframe">Загрузить</button>
+
+    <iframe 
+      ref="iframeRef" 
+      :src="currentUrl" 
+      width="100%" 
+      height="500px"
+      style="border: none;"
+    ></iframe>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const iframeUrl = ref('');
+const currentUrl = ref('');
+const iframeRef = ref(null);
+
+const loadIframe = () => {
+  if (!iframeUrl.value.startsWith('http')) {
+    alert('URL должен начинаться с http:// или https://');
+    return;
+  }
+  currentUrl.value = iframeUrl.value;
+};
+</script>
+```
+
+### Безопасность **iframe**
+
+❌ **XSS-атаки** — если iframe загружает вредоносный сайт
+
+❌ **Утечка данных** — iframe может получить доступ к родительскому окну
+
+### Решение: атрибут **sandbox**
+
+```html
+<iframe 
+  src="https://example.com" 
+  sandbox="allow-scripts allow-same-origin"
+></iframe>
+```
+
+1. **allow-scripts** — разрешает выполнение JS
+2. **allow-same-origin** — разрешает доступ к данным того же origin
+3. **allow-forms** — разрешает отправку форм
+4. **allow-popups** — разрешает открытие новых окон
+
+### Практические кейсы использования
+
+1. Встраивание YouTube-видео
+
+```html
+<template>
+  <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/..." 
+    title="YouTube video player" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen
+  ></iframe>
+</template>
+```
+
+2. Встраивание Google Maps
+
+```html
+<template>
+  <iframe
+    width="600"
+    height="450"
+    style="border:0"
+    loading="lazy"
+    :src="`https://www.google.com/maps/embed/v1/place....`"
+  ></iframe>
+</template>
+```
+
+3. Загрузка PDF
+
+```html
+<template>
+  <iframe 
+    src="/documents/document.pdf" 
+    width="100%" 
+    height="600px"
+  ></iframe>
+</template>
+```
+
+### Заключение
+
+**\<iframe\>** — мощный инструмент для встраивания стороннего контента, но требует осторожности
+
+✅ Используйте **sandbox** для безопасности
+
+✅ Контролируйте загрузку через **\@load**
+
+✅ Общайтесь с **iframe** через **postMessage**

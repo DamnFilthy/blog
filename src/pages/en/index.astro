@@ -40,6 +40,14 @@ const sortedPosts = sortPosts(posts.slice(0, 3));
       <p class="main-text">
         Here you will find ideas for your projects and career🚀
       </p>
+
+      <p class="enter-link">
+        <a
+          href="/en/blog"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+          >Read more</a
+        >
+      </p>
     </div>
   </div>
 
@@ -84,6 +92,13 @@ const sortedPosts = sortPosts(posts.slice(0, 3));
 </BaseEnLayout>
 
 <style>
+  .enter-link {
+    @media (max-width: 1279px) {
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+  }
   .post-item-image {
     object-fit: cover;
     height: 160px;

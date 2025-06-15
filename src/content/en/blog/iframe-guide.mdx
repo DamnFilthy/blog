@@ -1,0 +1,151 @@
+---
+title: 'Iframe in Web Development: A Complete Guide'
+description: 'Iframe in Web Development: A Complete Guide'
+pubDate: 'June 15 2025'
+heroImage: '/images/iframe.png'
+time: '6 min'
+tag: 'Browser'
+---
+
+# What is an iframe? 
+
+![debounce](/images/iframe.png)
+
+**\<iframe\>** (Inline Frame) — This is an HTML element that allows you to embed another HTML page or web application inside the current document
+
+### Basic usage scenarios
+
+1. Embedding external content (YouTube, Google Maps, widgets)
+2. Isolation of third-party code (for example, payment forms)
+3. Uploading documents (PDF, HTML reports)
+4. Micro service architecture (interaction between independent applications)
+
+### Basic iframe example
+
+The easiest way to insert an **iframe**
+
+```html
+<iframe 
+  src="https://example.com" 
+  width="600" 
+  height="400"
+  title="Пример iframe"
+></iframe>
+```
+
+**iframe attributes**
+
+1. **src** is the URL of the uploaded content
+2. **width / height** — frame dimensions
+3. **frameborder** (deprecated) — better control via CSS (border: none)
+4. **allow** — Security policies (camera, microphone, payments)
+5. **sandbox** — restriction of iframe rights (prohibition of scripts, forms, etc.)
+
+### Example: Dynamic content loading
+
+```vue
+<template>
+  <div>
+    <input v-model="iframeUrl" placeholder="Enter the URL (for example, https://vuejs.org)" />
+    <button @click="loadIframe">Load</button>
+
+    <iframe 
+      ref="iframeRef" 
+      :src="currentUrl" 
+      width="100%" 
+      height="500px"
+      style="border: none;"
+    ></iframe>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const iframeUrl = ref('');
+const currentUrl = ref('');
+const iframeRef = ref(null);
+
+const loadIframe = () => {
+  if (!iframeUrl.value.startsWith('http')) {
+    alert('The URL must start with http:// or https://');
+    return;
+  }
+  currentUrl.value = iframeUrl.value;
+};
+</script>
+```
+
+### Security **iframe**
+
+❌ **XSS attacks** — if an iframe loads a malicious website
+
+❌ **Data leak** — iframe can access parent window
+
+### Solution: the **sandbox attribute**
+
+```html
+<iframe 
+  src="https://example.com" 
+  sandbox="allow-scripts allow-same-origin"
+></iframe>
+```
+
+1. **allow-scripts** — allows JS execution
+2. **allow-same-origin** — allows access to data of the same origin
+3. **allow-forms** — allows sending of forms
+4. **allow-popups** — allows the opening of new windows
+
+### Practical use cases
+
+1. Embedding YouTube videos
+
+```html
+<template>
+  <iframe 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/..." 
+    title="YouTube video player" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen
+  ></iframe>
+</template>
+```
+
+2. Embedding Google Maps
+
+```html
+<template>
+  <iframe
+    width="600"
+    height="450"
+    style="border:0"
+    loading="lazy"
+    :src="`https://www.google.com/maps/embed/v1/place....`"
+  ></iframe>
+</template>
+```
+
+3. Download PDF
+
+```html
+<template>
+  <iframe 
+    src="/documents/document.pdf" 
+    width="100%" 
+    height="600px"
+  ></iframe>
+</template>
+```
+
+### Conclusion
+
+**\<iframe\>** is a powerful tool for embedding third—party content, but requires caution
+
+✅Use **sandbox** for security
+
+✅ Monitor the download via **\@load**
+
+✅ Communicate with **iframe** via **postMessage**

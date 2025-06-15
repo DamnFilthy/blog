@@ -6,11 +6,13 @@ const tags = (await getCollection("blog"))
   .map((item) => item.data.tag);
 
 tags.push("Все");
+
+const clearedTags = [...new Set(tags)]
 ---
 
 <div class="tags-list">
   {
-    tags.map((tag: string) => (
+    clearedTags.map((tag: string) => (
       <span class="tag" data-item-tag={tag}>
         {tag}
       </span>
