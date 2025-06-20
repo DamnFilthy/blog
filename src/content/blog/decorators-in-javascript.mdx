@@ -1,0 +1,173 @@
+---
+title: 'Декораторы в JavaScript'
+description: 'Декораторы в JavaScript: глубокое погружение с примерами'
+pubDate: 'June 20 2025'
+heroImage: '/images/decorators.avif'
+time: '5 мин'
+tag: 'JavaScript'
+---
+
+# Декораторы в JavaScript: глубокое погружение с примерами
+
+![decorators](/images/decorators.avif)
+
+> Декораторы (**Decorators**) — это мощная функциональность **JavaScript**, позволяющая модифицировать поведение классов и их методов. 
+Хотя они пока находятся на стадии предложения (Stage 3), декораторы активно используются с транспиляторами **(Babel,** **TypeScript**).
+
+### Как работают декораторы в JavaScript
+
+> Декораторы — это специальные функции, которые применяются к классам, методам, свойствам или параметрам функций. 
+Они начинаются с символа **@** и размещаются непосредственно перед объявлением того, что они декорируют
+
+### Основные типы декораторов
+
+1. Декораторы класса - модифицируют весь класс
+2. Декораторы методов - изменяют поведение методов класса
+3. Декораторы свойств - работают со свойствами класса
+4. Декораторы параметров - модифицируют параметры методов
+
+### Принцип работы декораторов
+
+```javascript
+// Простой декоратор метода
+function log(target, name, descriptor) {
+  const originalMethod = descriptor.value;
+  
+  descriptor.value = function(...args) {
+    console.log(`Вызов метода ${name} с аргументами: ${args}`);
+    const result = originalMethod.apply(this, args);
+    console.log(`Метод ${name} вернул: ${result}`);
+    return result;
+  };
+  
+  return descriptor;
+}
+
+class Calculator {
+  @log
+  add(a, b) {
+    return a + b;
+  }
+}
+
+const calc = new Calculator();
+calc.add(2, 3); // Логирует вызов и результат
+```
+
+### Как это работает
+
+1. Декоратор получает три аргумента:
+        - **target** класс, к которому принадлежит метод
+        - **name** имя декорируемого метода
+        - **descriptor** объект дескриптора метода (как в **Object.defineProperty**)
+2. Декоратор модифицирует поведение, оборачивая оригинальный метод
+
+### Использование декораторов во Vue
+
+Во **Vue** декораторы особенно полезны с **TypeScript** и библиотеками вроде vue-class-component.
+
+Рассмотрим практические примеры с **Composition API**
+
+### Декораторы для API-вызовов
+
+```typescript
+// Декоратор для управления состоянием загрузки
+export function WithLoading() {
+  return function(target: any, key: string, descriptor: PropertyDescriptor) {
+    const originalMethod = descriptor.value;
+    const loadingKey = `${key}Loading`;
+    
+    // Добавляем свойство состояния загрузки
+    target[loadingKey] = ref(false);
+    
+    descriptor.value = async function(...args: any[]) {
+      try {
+        this[loadingKey].value = true;
+        return await originalMethod.apply(this, args);
+      } finally {
+        this[loadingKey].value = false;
+      }
+    };
+    
+    return descriptor;
+  };
+}
+
+// Пример использования в компоненте
+export default class UserComponent {
+  @WithLoading()
+  async fetchUserData(userId: string): Promise<User> {
+    const response = await fetch(`/api/users/${userId}`);
+    return response.json();
+  }
+
+  // Состояние загрузки будет автоматически создано как
+  // fetchUserDataLoading: Ref<boolean>
+}
+```
+
+### Композиция декораторов
+
+```typescript
+// Декоратор для кэширования результатов
+function Cache(maxAge: number = 300000) { // 5 минут по умолчанию
+  return function(target: any, key: string, descriptor: PropertyDescriptor) {
+    const originalMethod = descriptor.value;
+    const cache = new Map();
+    
+    descriptor.value = function(...args: any[]) {
+      const cacheKey = JSON.stringify(args);
+      
+      if (cache.has(cacheKey)) {
+        const { timestamp, value } = cache.get(cacheKey);
+        if (Date.now() - timestamp < maxAge) {
+          return value;
+        }
+      }
+      
+      const result = originalMethod.apply(this, args);
+      cache.set(cacheKey, { value: result, timestamp: Date.now() });
+      return result;
+    };
+    
+    return descriptor;
+  };
+}
+
+// Пример использования
+class ApiService {
+  @Cache(60000) // Кэшировать на 1 минуту
+  @WithLoading()
+  async fetchData(endpoint: string) {
+    // ...
+  }
+}
+```
+
+### Преимущества и недостатки декораторов во Vue
+
+**Преимущества**
+
+- Уменьшают шаблонный код
+- Упрощают повторное использование логики
+- Делают код более декларативным
+- Позволяют разделять ответственность
+
+**Недостатки**
+
+- Все еще экспериментальная функциональность
+- Требуют дополнительной настройки (TypeScript/Babel)
+- Могут усложнить отладку
+- Не все Vue-разработчики знакомы с ними
+
+### Заключение
+
+Декораторы в **JavaScript** предоставляют мощный способ модификации поведения классов и методов. Во **Vue** они особенно полезны для:
+
+- Упрощения работы с Vuex
+- Обработки ошибок в API-вызовах
+- Управления состоянием загрузки
+- Валидации пропсов
+
+Хотя декораторы все еще находятся на стадии предложения, их можно использовать в своих проектах. 
+При правильном применении они могут значительно улучшить читаемость и поддерживаемость кода.

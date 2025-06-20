@@ -9,7 +9,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   site: "https://shiryaev.io/",
-  integrations: [mdx(), sitemap(), compressor()],
+  integrations: [mdx(), sitemap(), compressor(), pagefind()],
 
   build: {
     format: "directory",
