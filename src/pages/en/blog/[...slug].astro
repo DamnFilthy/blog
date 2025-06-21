@@ -1,6 +1,9 @@
 ---
 import BaseEnLayout from "../../../layouts/BaseEnLayout.astro";
 import FormattedDate from "../../../components/FormattedDate.astro";
+import FormattedTime from "../../../components/FormattedTime.astro";
+
+import { sortPosts } from "../../../utils/sort";
 
 import { type CollectionEntry, getCollection } from "astro:content";
 import { render } from "astro:content";
@@ -17,6 +20,14 @@ type Props = CollectionEntry<"blogEn">;
 
 const post = Astro.props;
 const { Content } = await render(post);
+
+const posts = await getCollection("blogEn", ({ data }) => data.pubDate);
+
+const relevantPosts = posts.filter(
+  (item) =>
+    item.data.tag === post.data.tag && item.data.title !== post.data.title
+);
+const sortedPosts = sortPosts(relevantPosts).slice(0, 3);
 ---
 
 <BaseEnLayout
@@ -27,6 +38,45 @@ const { Content } = await render(post);
   <article class="article-post">
     <Content />
   </article>
+
+    {
+    sortedPosts.length && sortedPosts.length > 0 ? (
+      <div class="mt-10 mb-10 w-full">
+        <h2
+          class="text-xl font-bold tracking-tight md:text-3xl"
+          style="margin-bottom: 30px;"
+        >
+          More interesting on the topic
+        </h2>
+
+        <ul class="flex flex-wrap items-start justify-center lg:justify-between gap-2">
+          {sortedPosts.map((post) => (
+            <li>
+              <a
+                href={`/blog/${post.id}/`}
+                class="min-h-[280px] flex flex-col justify-between"
+              >
+                <img
+                  class="post-item-image"
+                  width={320}
+                  height={160}
+                  src={post.data.heroImage}
+                  alt="post image"
+                />
+
+                <h4 class="title">{post.data.title}</h4>
+
+                <div class="flex items-center justify-between">
+                  <FormattedDate date={post.data.pubDate} />
+                  <FormattedTime time={post.data.time} />
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ) : null
+  }
 </BaseEnLayout>
 
 <style is:inline>
